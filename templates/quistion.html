@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+<h1>Test page</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for q in quistions %}
+        {{ q.name }}<br>
+        {% for answer in answers %}
+            {% if q.id == answer.question.id %}
+                <input type="radio" name="{{ q.name }}" value="{{ answer.is_right }}">
+                <label>{{ answer.name }}</label><br>
+            {% endif %}
+        {% endfor %}
+        <hr>
+    {% endfor %}
+
+    <button type="submit">Natijani kurish</button>
+</form>
+
+{% endblock %}

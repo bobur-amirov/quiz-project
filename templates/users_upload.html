@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+ <h1>Foydalanuvchi qo'shish</h1>
+    <hr>
+<form method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="users">
+    <button>Saqlash</button>
+</form>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">T/R</th>
+      <th scope="col">Ism</th>
+      <th scope="col">Familiya</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users %}
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
